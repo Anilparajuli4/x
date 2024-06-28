@@ -21,7 +21,6 @@ function App() {
 				if (!res.ok) {
 					throw new Error(data.error || "Something went wrong");
 				}
-				console.log("authUser is here:", data);
 				return data;
 			} catch (error) {
 				throw new Error(error);
@@ -37,18 +36,18 @@ function App() {
 	// 		</div>
 	// 	);
 	// }
-
+const authUsers = authUser?.data
   return (
     <div className='flex max-w-6xl mx-auto'>
-      {authUser && <Sidebar/>}
+      {authUsers && <Sidebar/>}
     <Routes>
-    <Route path='/' element={authUser ? <Home /> : <Navigate to='/login' />} />
-				<Route path='/login' element={!authUser ? <Login /> : <Navigate to='/' />} />
-				<Route path='/signup' element={!authUser ? <SignUp /> : <Navigate to='/' />} />
-				<Route path='/notifications' element={authUser ? <NotificationPage/> : <Navigate to='/login' />} />
-				<Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
+    <Route path='/' element={authUsers ? <Home /> : <Navigate to='/login' />} />
+				<Route path='/login' element={!authUsers ? <Login /> : <Navigate to='/' />} />
+				<Route path='/signup' element={!authUsers ? <SignUp /> : <Navigate to='/' />} />
+				<Route path='/notifications' element={authUsers ? <NotificationPage/> : <Navigate to='/login' />} />
+				<Route path='/profile/:username' element={authUsers ? <ProfilePage /> : <Navigate to='/login' />} />
     </Routes>
-    {authUser && <RightPanel/>}
+    {authUsers && <RightPanel/>}
     </div>
   )
 }
