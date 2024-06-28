@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
+
 
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const NotificationPage = () => {
 	const isLoading = false;
@@ -53,7 +53,7 @@ const NotificationPage = () => {
 				</div>
 				{isLoading && (
 					<div className='flex justify-center h-full items-center'>
-						<LoadingSpinner size='lg' />
+						{/* <LoadingSpinner size='lg' /> */}
 					</div>
 				)}
 				{notifications?.length === 0 && <div className='text-center p-4 font-bold'>No notifications 🤔</div>}

@@ -59,12 +59,12 @@ try {
 
 export const loginUser= async(req, res, next) =>{
     try {
-        const {email, password} = req.body
-        if(!email || !password){
+        const {username, password} = req.body
+        if(!username || !password){
             return next(new ErrorHandler(400, 'all fields are required'))
         }
     
-        const user = await User.findOne({email})
+        const user = await User.findOne({username})
         if(!user){
             return next(new ErrorHandler(400, 'user doesnot exist'))
         }
@@ -77,7 +77,7 @@ export const loginUser= async(req, res, next) =>{
         const {password:hashPassword, ...rest} = user._doc
         return res.status(200).json({
            success:true,
-           data: rest,
+           data: rest, 
             message: 'login successfully'
         })
     } catch (error) {

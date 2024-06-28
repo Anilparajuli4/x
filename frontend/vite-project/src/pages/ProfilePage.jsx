@@ -1,16 +1,17 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
 
-import Posts from "../../components/common/Posts";
-import ProfileHeaderSkeleton from "../../components/skeletons/ProfileHeaderSkeleton";
-import EditProfileModal from "./EditProfileModal";
 
-import { POSTS } from "../../utils/db/dummy";
+
 
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
 import { FaLink } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { useRef, useState } from "react";
+import ProfileHeaderSkeleton from "../components/skeletons/ProfileHeaderSkeleton";
+import { Link } from "react-router-dom";
+import { POSTS } from "../utils/db/dummy";
+import EditProfileModal from "./EditProfileModel";
+import Posts from "../components/common/Posts";
 
 const ProfilePage = () => {
 	const [coverImg, setCoverImg] = useState(null);
@@ -51,7 +52,7 @@ const ProfilePage = () => {
 		<>
 			<div className='flex-[4_4_0]  border-r border-gray-700 min-h-screen '>
 				{/* HEADER */}
-				{isLoading && <ProfileHeaderSkeleton />}
+				{isLoading && <ProfileHeaderSkeleton/>}
 				{!isLoading && !user && <p className='text-center text-lg mt-4'>User not found</p>}
 				<div className='flex flex-col'>
 					{!isLoading && user && (
@@ -109,7 +110,7 @@ const ProfilePage = () => {
 								</div>
 							</div>
 							<div className='flex justify-end px-4 mt-5'>
-								{isMyProfile && <EditProfileModal />}
+								{isMyProfile && <EditProfileModal/>}
 								{!isMyProfile && (
 									<button
 										className='btn btn-outline rounded-full btn-sm'
@@ -190,10 +191,10 @@ const ProfilePage = () => {
 						</>
 					)}
 
-					<Posts />
+					<Posts/>
 				</div>
 			</div>
 		</>
 	);
 };
-export default ProfilePage;
+export default ProfilePage; 
