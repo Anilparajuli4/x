@@ -7,8 +7,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
+	console.log(post);
 	const [comment, setComment] = useState("");
-	const postOwner = post?.user;
+	const postOwner = post?.user?.username;
 	const isLiked = false;
 
 	const isMyPost = true;
@@ -50,10 +51,10 @@ const Post = ({ post }) => {
 						)}
 					</div>
 					<div className='flex flex-col gap-3 overflow-hidden'>
-						<span>{post.text}</span>
-						{post.img && (
+						<span>{post?.text}</span>
+						{post?.img && (
 							<img
-								src={post.img}
+								src={post?.img}
 								className='h-80 object-contain rounded-lg border border-gray-700'
 								alt=''
 							/>
@@ -80,23 +81,23 @@ const Post = ({ post }) => {
 												No comments yet 🤔 Be the first one 😉
 											</p>
 										)}
-										{post.comments.map((comment) => (
+										{post?.comments?.map((comment) => (
 											<div key={comment._id} className='flex gap-2 items-start'>
 												<div className='avatar'>
 													<div className='w-8 rounded-full'>
 														<img
-															src={comment.user.profileImg || "/avatar-placeholder.png"}
+															src={comment?.user?.profileImg || "./avatar-placeholder.png"}
 														/>
 													</div>
 												</div>
 												<div className='flex flex-col'>
 													<div className='flex items-center gap-1'>
-														<span className='font-bold'>{comment.user.fullName}</span>
+														<span className='font-bold'>{comment?.user?.fullname}</span>
 														<span className='text-gray-700 text-sm'>
-															@{comment.user.username}
+															@{comment?.user?.username}
 														</span>
 													</div>
-													<div className='text-sm'>{comment.text}</div>
+													<div className='text-sm'>{comment?.text}</div>
 												</div>
 											</div>
 										))}
@@ -139,7 +140,7 @@ const Post = ({ post }) => {
 										isLiked ? "text-pink-500" : ""
 									}`}
 								>
-									{post.likes.length}
+									{post?.likes.length}
 								</span>
 							</div>
 						</div>
