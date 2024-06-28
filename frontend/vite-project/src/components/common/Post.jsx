@@ -5,20 +5,44 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const Post = ({ post }) => {
 	console.log(post);
 	const [comment, setComment] = useState("");
+	const {data:authUser} = useQuery({queryKey: ['authUser']})
+	const queryClient = useQueryClient()
+	const {mutate:deletePost} = useQuery({
+		queryFn:async ()=>{
+			try {
+				const res =await fetch(`/api/post/${post._id}`)
+				const data = await res.json()
+				if(!res.ok){
+					throw new Error(data.message || 'something went wrong')
+				}
+				return data
+			} catch (error) {
+				throw  new Error(error)
+			}
+		},
+		onSuccess: () =>{
+			toast.success('post deleted successfully')
+			queryClient.invalidateQueries({queryKey: ['Posts']})
+		}
+	})
 	const postOwner = post?.user?.username;
 	const isLiked = false;
 
-	const isMyPost = true;
+	const isMyPost = authUser._id === post?.user?._id;
 
 	const formattedDate = "1h";
 
 	const isCommenting = false;
 
-	const handleDeletePost = () => {};
+	const handleDeletePost = () => {
+       deletePost()
+	};
 
 	const handlePostComment = (e) => {
 		e.preventDefault();
