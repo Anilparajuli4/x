@@ -6,7 +6,7 @@ import {useMutation, useQuery} from '@tanstack/react-query';
 import { useQueryClient } from "@tanstack/react-query";
 import toast from 'react-hot-toast'
 
-const CreatePost = () => {
+const CreatePost  = () => {
 	const [text, setText] = useState("");
 	const [img, setImg] = useState(null);
 	const {data:authUser} = useQuery({queryKey: ['authUser']})
